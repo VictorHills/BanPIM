@@ -11,14 +11,16 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $user_id = auth()->user()->id;
+        $products = Product::where('created_by', $user_id)->get();
         return view('products.index', compact('products'));
     }
 
     public function create()
     {
-        $categories = Category::all();
-        $tags = Tag::all();
+        $user_id = auth()->user()->id;
+        $categories = Category::where('created_by', $user_id)->get();
+        $tags = Tag::where('created_by', $user_id)->get();
         return view('products.create', compact('categories', 'tags'));
     }
 
@@ -50,8 +52,9 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $categories = Category::all();
-        $tags = Tag::all();
+        $user_id = auth()->user()->id;
+        $categories = Category::where('created_by', $user_id)->get();
+        $tags = Tag::where('created_by', $user_id)->get();
         return view('products.edit', compact('product', 'categories', 'tags'));
     }
 

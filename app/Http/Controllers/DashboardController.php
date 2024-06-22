@@ -9,10 +9,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $numProducts = Product::count();
-        $numMedia = Media::count();
-        $productViews = Product::sum('views');
-        $numDownloads = Product::sum('downloads');
+        $user_id = auth()->user()->id;
+        $numProducts = Product::where('created_by', $user_id)->count();
+        $numMedia = Media::where('created_by', $user_id)->count();
+        $productViews = Product::where('created_by', $user_id)->sum('views');
+        $numDownloads = Product::where('created_by', $user_id)->sum('downloads');
 
         return view('dashboard', compact('numProducts', 'numMedia', 'productViews', 'numDownloads'));
     }
