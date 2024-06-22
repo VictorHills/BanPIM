@@ -2,33 +2,92 @@
 
 @section('content')
     <div class="container">
-        <h1>Edit Media</h1>
-        <form action="{{ route('media.update', $media->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="name">Media Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $media->name }}" required>
+        <h1 class="my-4">Edit Media</h1>
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <form action="{{ route('media.update', $media->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name">Media Name</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $media->name }}" required>
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" required>{{ $media->description }}</textarea>
+                        @error('description')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="category_id">Category</label>
+                        <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id" required>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ $media->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="file">Upload New File (optional)</label>
+                        <input type="file" class="form-control-file @error('file') is-invalid @enderror" id="file" name="file">
+                        @error('file')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description"
-                          required>{{ $media->description }}</textarea>
-            </div>
-            <div class="form-group">
-                <label for="category_id">Category</label>
-                <select class="form-control" id="category_id" name="category_id" required>
-                    @foreach($categories as $category)
-                        <option
-                            value="{{ $category->id }}" {{ $media->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="file">Upload New File (optional)</label>
-                <input type="file" class="form-control-file" id="file" name="file">
-            </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-        </form>
+        </div>
     </div>
+@endsection
+
+@section('styles')
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 1rem;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .invalid-feedback {
+            display: block;
+        }
+    </style>
 @endsection

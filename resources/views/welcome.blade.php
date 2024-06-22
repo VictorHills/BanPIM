@@ -92,7 +92,7 @@
         </div>
     @endif
 
-    <div class="content" style="margin-top: 4000px">
+    <div class="content" style="margin-top: 3500px">
         <div class="title m-b-md">
             Welcome to BanPIM
         </div>

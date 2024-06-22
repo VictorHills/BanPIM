@@ -81,4 +81,3 @@ class MediaController extends Controller
         return redirect()->route('media.index');
     }
 }
-

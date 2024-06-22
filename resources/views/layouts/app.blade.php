@@ -8,22 +8,35 @@
     <style>
         body {
             font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding-top: 56px; /* Height of the navbar */
         }
 
         .navbar {
             margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .card {
             margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Global table styles */
+        .card-header {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            background-color: #007bff;
+            color: white;
+        }
+
         .table {
-            width: 90%;
-            margin: 20px auto;
+            width: 100%;
+            margin: 20px 0;
             border-collapse: collapse;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
         }
 
         .table th, .table td {
@@ -53,13 +66,23 @@
         .btn {
             margin-right: 5px;
         }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
     </style>
     @yield('styles')
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light bg-white fixed-top">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">BanPIM</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 @guest
