@@ -11,14 +11,14 @@ class MediaController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $media = Media::where('created_by', $user_id)->get();
+        $media = Media::where('created_by', $user_id)->latest()->get();
         return view('media.index', compact('media'));
     }
 
     public function create()
     {
         $user_id = auth()->user()->id;
-        $categories = Category::where('created_by', $user_id)->get();
+        $categories = Category::where('created_by', $user_id)->latest()->get();
         return view('media.create', compact('categories'));
     }
 
@@ -52,7 +52,7 @@ class MediaController extends Controller
     public function edit(Media $media)
     {
         $user_id = auth()->user()->id;
-        $categories = Category::where('created_by', $user_id)->get();
+        $categories = Category::where('created_by', $user_id)->latest()->get();
         return view('media.edit', compact('media', 'categories'));
     }
 

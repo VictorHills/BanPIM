@@ -10,7 +10,7 @@ class CategoryController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $categories = Category::where('created_by', $user_id)->get();;
+        $categories = Category::where('created_by', $user_id)->latest()->get();;
         return view('categories.index', compact('categories'));
     }
 
