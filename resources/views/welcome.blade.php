@@ -98,7 +98,7 @@
         </div>
 
         <div class="links">
-            <h2>Here's all the Products available</h2>
+            <h2>Here are all the Products available</h2>
             <table class="table mt-3">
                 <thead>
                 <tr>
